@@ -4,7 +4,7 @@ Etape 0: Paramétrer les variables d'environnement
 
 export VAULT_ADDR=https://vault-cluster-prod-public-vault-fa7b3917.bc6c60bc.z1.hashicorp.cloud:8200
 
-export VAULT_TOKEN=
+export VAULT_TOKEN=''
 
 export VAULT_NAMESPACE=admin
 
