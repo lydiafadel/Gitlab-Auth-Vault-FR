@@ -1,0 +1,30 @@
+export VAULT_ADDR=https://vault-cluster-prod-public-vault-fa7b3917.bc6c60bc.z1.hashicorp.cloud:8200
+export VAULT_TOKEN=
+export VAULT_NAMESPACE=
+
+// admin namespace 
+
+vault auth enable  oidc
+
+vault write auth/oidc/config \
+  oidc_discovery_url="https://gitlab.com" \
+  oidc_client_id="abe4bf87dbe603ec8f144a9e6dd5f52516de899c388f2fe616abd66ace396109" \
+  oidc_client_secret="e624869dee268163cc7810a04954f14ce6bc3600109f71c470a8adb35a1fd5ec" \
+  default_role="demo" \
+  bound_issuer="localhost"
+  
+  vault write auth/oidc/role/demo -<<EOF
+{
+   "user_claim": "sub",
+   "allowed_redirect_uris": ["http://localhost:8250/oidc/callback", "https://vault-cluster-prod-public-vault-fa7b3917.bc6c60bc.z1.hashicorp.cloud:8200/ui/vault/auth/oidc/oidc/callback"],
+   "bound_audiences": "abe4bf87dbe603ec8f144a9e6dd5f52516de899c388f2fe616abd66ace396109",
+   "oidc_scopes": ["openid"],
+   "role_type": "oidc", 
+   "policies": ["default"],
+   "ttl": "1h",
+   "bound_claims": {"groups": ["vault20/developers"]}
+}   
+EOF
+
+Se connecter sur UI
+Se connecter sur CLI : vault login -method=oidc port=8250 role=demo
