@@ -27,7 +27,7 @@ ETape 3 : Paramétrer la configuration oidc
          bound_issuer="localhost"
   
   
-L'oidc_discovery_url correspond à l'URL de votre gitlab
+L'oidc_discovery_url correspond à l'URL de votre gitlab.
 Ma configuration est rattaché au rôle "demo" que je vais créer dans l'étape suivante
 
 Etape 4 : Definir un role et y attacher une policy (default) déjà créé dans le namespace admin
@@ -52,6 +52,7 @@ Etape 4 : Definir un role et y attacher une policy (default) déjà créé dans 
 
 
 Connectez vous sur l'interface utilisateur en mettant le nom du role ou depuis un shell en local :
+      
       vault login -method=oidc port=8250 role=demo
    
 Autre option: lorsque que vous vous connectez en local, est généré un token que vous pouvez utiliser pour vous connecter depuis l'interface utilisateur sans passer par le role.
