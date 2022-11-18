@@ -2,9 +2,14 @@ export VAULT_ADDR=https://vault-cluster-prod-public-vault-fa7b3917.bc6c60bc.z1.h
 export VAULT_TOKEN=
 export VAULT_NAMESPACE=admin
 
-// admin namespace 
+Step 1 : Setup the oidc application in Gitlab 
 
-vault auth enable  oidc
+
+Step 2 : Enable oidc auth method through the UI or CLI
+
+ vault auth enable  oidc
+
+Step 3 : Setup the oidc config
 
 vault write auth/oidc/config \
   oidc_discovery_url="https://gitlab.com" \
@@ -13,6 +18,9 @@ vault write auth/oidc/config \
   default_role="demo" \
   bound_issuer="localhost"
   
+  
+Step 4 : Define the role, attach a policy to it
+
   vault write auth/oidc/role/demo -<<EOF
 {
    "user_claim": "sub",
@@ -26,5 +34,5 @@ vault write auth/oidc/config \
 }   
 EOF
 
-Se connecter sur UI
-Se connecter sur CLI : vault login -method=oidc port=8250 role=demo
+Connect through the UI
+Connect through the CLI : vault login -method=oidc port=8250 role=demo
