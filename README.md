@@ -44,7 +44,7 @@ Etape 4 : Definir un role et y attacher une policy déjà créé dans le namespa
       
    "policies": ["default"], --> affecter les policy Vault auquel votre groupe d'utilisateur gitlab soit rattaché
       
-   "ttl": "1h",
+   "ttl": "1h", --> définissez un ttl, temps pendant lequel le token d'authentification généré sera valide
       
    "bound_claims": {"groups": ["vault20/developers"]} --> vault20 : groupe gitlab, developers : sous groupe
       
@@ -54,7 +54,6 @@ EOF
 
 Bound claims correspond aux groupes/projet et sous groupes gitlab que vous aurez créé. Le nom du groupe diffère de celui que vous avez créé (dans mon cas j'ai créé vault mais le claim correspondant est vault20. Vous pouvez le trouver dans les paramètres avancés de votre groupe ou en faisant un appel API avec postman ou autre outil.
 
-Définissez un ttl, temps pendant lequel le token d'authentification généré sera valide.
 
 Connectez vous sur l'interface utilisateur en mettant le nom du role ou depuis un shell en local :
    vault login -method=oidc port=8250 role=demo
