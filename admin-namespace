@@ -2,24 +2,25 @@ export VAULT_ADDR=https://vault-cluster-prod-public-vault-fa7b3917.bc6c60bc.z1.h
 export VAULT_TOKEN=
 export VAULT_NAMESPACE=admin
 
-Step 1 : Setup the oidc application in Gitlab 
+Etape 1 : Paramétrer l'application oidc application dans votre Gitlab 
 
 
-Step 2 : Enable oidc auth method through the UI or CLI
+Etape 2 : Paramétrer la méthode authentification oidc à traevers l'interface utilisateur ou le CLI
 
- vault auth enable  oidc
+      vault auth enable  oidc
 
 Step 3 : Setup the oidc config
 
-vault write auth/oidc/config \
-  oidc_discovery_url="https://gitlab.com" \
-  oidc_client_id="abe4bf87dbe603ec8f144a9e6dd5f52516de899c388f2fe616abd66ace396109" \
-  oidc_client_secret="e624869dee268163cc7810a04954f14ce6bc3600109f71c470a8adb35a1fd5ec" \
-  default_role="demo" \
-  bound_issuer="localhost"
+  vault write auth/oidc/config \
+    oidc_discovery_url="https://gitlab.com" \
+    oidc_client_id="mettre le numéro de client généré sur l'application gitlab" \
+    oidc_client_secret="mettre le secret généré sur l'application gitlab" \
+    default_role="demo" \
+    bound_issuer="localhost"
   
-  
-Step 4 : Define the role, attach a policy to it
+Ma configuration est rattaché au rôle "demo" que je vais créer dans l'étape suivante
+
+Etape 4 : Definir un role et y attacher une policy
 
   vault write auth/oidc/role/demo -<<EOF
 {
