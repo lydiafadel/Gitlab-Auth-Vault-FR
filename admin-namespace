@@ -38,5 +38,4 @@ EOF
 Connect through the UI
 Connect through the CLI : vault login -method=oidc port=8250 role=demo
 
-Link to the gitlab documentation:
-https://docs.gitlab.com/ee/integration/vault.html
+
