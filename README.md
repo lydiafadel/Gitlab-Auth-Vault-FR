@@ -10,7 +10,7 @@ export VAULT_NAMESPACE=admin
 
 Etape 1 : Paramétrer l'application oidc application dans votre Gitlab 
 
-Récupérer l'application ID et secret 
+Récupérer l'application ID et secret (cf lien vers documentation plus bas)
 
 
 Etape 2 : Activer la méthode authentification oidc sur le namespace voulu à travers l'interface utilisateur ou le CLI
