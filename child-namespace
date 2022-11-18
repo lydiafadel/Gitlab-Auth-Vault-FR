@@ -32,3 +32,7 @@ EOF
 
 // Connect through the CLI : 
 vault login -namespace=admin/education/ -method=oidc port=8250 role=gitlab
+
+
+Link to the gitlab documentation:
+https://docs.gitlab.com/ee/integration/vault.html
