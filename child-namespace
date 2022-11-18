@@ -1,0 +1,29 @@
+vault auth enable -namespace=admin/education/ oidc
+
+vault write -namespace=admin/education/ auth/oidc/config \
+  oidc_discovery_url="https://gitlab.com" \
+  oidc_client_id="88433f65c17d539ea0e1f0a4acf1f94054a1ec0f67826fee80740e2c031d01d1" \
+  oidc_client_secret="b92c67ff645b779c0552a4d72e7501ed67eb74a06925d0d8c2b470e57f7feff5" \
+  default_role="gitlab" \
+  bound_issuer="localhost"
+
+
+vault write -namespace=admin/education/ auth/oidc/role/gitlab -<<EOF
+{
+   "user_claim": "sub",
+   "allowed_redirect_uris": ["http://localhost:8250/oidc/callback", "https://vault-cluster-prod-public-vault-fa7b3917.bc6c60bc.z1.hashicorp.cloud:8200/ui/vault/auth/oidc/oidc/callback?namespace=education"], 
+   "bound_audiences": "88433f65c17d539ea0e1f0a4acf1f94054a1ec0f67826fee80740e2c031d01d1",
+   "oidc_scopes": ["openid"],
+   "role_type": "oidc", 
+   "policies": ["default"],
+   "ttl": "1h",
+   "bound_claims": {"groups": ["namespace3/lydia"]},
+   "oidc_response_mode": "form_post",
+   "oidc_response_types": "id_token",
+   "namespace_in_state": "false"
+}   
+EOF
+
+
+// Connect through the CLI : 
+vault login -namespace=admin/education/ -method=oidc port=8250 role=gitlab
